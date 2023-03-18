@@ -3,9 +3,11 @@ import SquareBox from "./SquareBox";
 
 interface BoardProps {
   bombPercentage: number;
+  isGameOver: boolean;
+  onGameOver: () => void;
 }
 
-const Board = ({ bombPercentage }: BoardProps) => {
+const Board = ({ bombPercentage, isGameOver, onGameOver }: BoardProps) => {
   const [board, setBoard] = useState<number[][]>([]);
 
   useEffect(() => {
@@ -27,11 +29,23 @@ const Board = ({ bombPercentage }: BoardProps) => {
     setBoard(newBoard);
   }, [bombPercentage]);
 
+  const handleBoxReveal = (rowIndex: number, colIndex: number) => {
+    if (board[rowIndex][colIndex] === 1) {
+      onGameOver();
+    }
+  };
+
   return (
     <div className="grid grid-cols-10 gap-0">
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
-          <SquareBox key={`${rowIndex}-${colIndex}`} isBomb={cell === 1} />
+          <SquareBox
+            key={`${rowIndex}-${colIndex}`}
+            isBomb={cell === 1}
+            numberValue={0}
+            onReveal={() => handleBoxReveal(rowIndex, colIndex)}
+            disabled={isGameOver}
+          />
         ))
       )}
     </div>

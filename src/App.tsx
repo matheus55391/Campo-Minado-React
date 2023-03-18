@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import Board from './components/Board';
+import { useState } from "react";
+import Board from "./components/Board";
 
-const App = () => {
+function App() {
   const [key, setKey] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   const handleReset = () => {
+    setGameOver(false);
     setKey(key + 1);
+  };
+
+  const handleGameOver = () => {
+    setGameOver(true);
   };
 
   return (
@@ -19,14 +25,21 @@ const App = () => {
           Reset
         </button>
       </div>
+      {gameOver && (
+        <div className="flex justify-center items-center text-red-500 font-bold">
+          GAMEOVER
+        </div>
+      )}
       <div className="flex-1 flex justify-center items-center">
-        <Board bombPercentage={10} key={key} />
+        <Board bombPercentage={10} key={key} isGameOver={gameOver} onGameOver={handleGameOver} />
       </div>
       <div className="flex items-center justify-center bg-gray-200 py-2">
-        <span className="text-gray-600">Desenvolvido por Matheus Felipe Vieira Santiago</span>
+        <span className="text-gray-600">
+          Desenvolvido por Matheus Felipe Vieira Santiago
+        </span>
       </div>
     </div>
   );
-};
+}
 
 export default App;
