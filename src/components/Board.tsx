@@ -45,6 +45,7 @@ const Board = ({ bombPercentage, isGameOver, onGameOver }: BoardProps) => {
             numberValue={0}
             onReveal={() => handleBoxReveal(rowIndex, colIndex)}
             disabled={isGameOver}
+            isGameOver={isGameOver}
           />
         ))
       )}
