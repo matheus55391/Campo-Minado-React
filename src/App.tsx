@@ -1,19 +1,12 @@
-import SquareBox from "./components/SquareBox";
+import React from 'react';
+import Board from './components/Board';
 
-function App() {
+const App = () => {
   return (
-    <div className="flex flex-wrap">
-      <SquareBox isBomb={true} />
-      <SquareBox isBomb={false} />
-      <SquareBox isBomb={false} />
-      <SquareBox isBomb={true} />
-      <SquareBox isBomb={false} />
-      <SquareBox isBomb={false} />
-      <SquareBox isBomb={false} />
-      <SquareBox isBomb={false} />
-      <SquareBox isBomb={true} />
+    <div className="flex justify-center items-center h-screen">
+      <Board bombPercentage={10} />
     </div>
   );
-}
+};
 
 export default App;
