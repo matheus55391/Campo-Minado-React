@@ -3,7 +3,24 @@ import IMineField from '../interfaces/IMineField'
 import ISquareBox from '../interfaces/ISquareBox'
 import countMinesAround from './countMinesAround'
 
+/**
+ * Gera um campo minado.
+ * 
+ * @param {number} rows - O número de linhas do campo minado.
+ * @param {number} cols - O número de colunas do campo minado.
+ * @param {number} minePercent - A porcentagem de minas que o campo minado terá.
+ * @returns {IMineField} - O objeto que representa o campo minado.
+ */
 function generateMinefield(rows: number, cols: number, minePercent: number): IMineField {
+	// verifica se minePercent é menor do que 0
+	if (minePercent < 0) {
+		minePercent = 0 // se for, atribui 0 a minePercent
+	}
+	
+	// verifica se minePercent é maior do que 100
+	if (minePercent > 100) {
+		minePercent = 100 // se for, atribui 100 a minePercent
+	}
 	// calcula a quantidade de minas baseado na porcentagem
 	const totalBoxes = rows * cols
 	const totalMines = Math.floor(totalBoxes * (minePercent / 100))

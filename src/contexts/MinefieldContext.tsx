@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react'
 import GameState from '../interfaces/GameState'
 import IBoard from '../interfaces/IBoard'
 import IMineField from '../interfaces/IMineField'
+import generateMinefield from '../utils/generateMinefield'
 
 interface IMinefieldContext {
   minefield: IMineField;
@@ -30,12 +31,7 @@ interface IMinefieldProviderProps {
   }
   
 export const MinefieldProvider: React.FC<IMinefieldProviderProps> = ({ children }: IMinefieldProviderProps) => {
-	const [minefield, setMinefield] = useState<IMineField>({
-		board: { rows: 0, cols: 0, boxes: [] },
-		mines: 0,
-		minesLeft: 0,
-		gameState: GameState.NOT_STARTED,
-	})
+	const [minefield, setMinefield] = useState<IMineField>(generateMinefield(10, 10, 10))
   
 	useEffect(()=>{
 		console.log('🚀 ~ file: MinefieldContext.tsx:44 ~ minefield:', minefield)

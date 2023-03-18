@@ -1,3 +1,10 @@
+/**
+ * Conta o número de minas ao redor de uma caixa em uma matriz de minas.
+ * @param {boolean[][]} isMine - Matriz de minas.
+ * @param {number} row - Índice da linha da caixa.
+ * @param {number} col - Índice da coluna da caixa.
+ * @returns {number} - O número de minas ao redor da caixa.
+ */
 function countMinesAround(isMine: boolean[][], row: number, col: number): number {
 	const positions = [
 		[-1, -1], [-1, 0], [-1, 1],
