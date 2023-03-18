@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 import { MinefieldContext } from '../contexts/MinefieldContext'
 import generateMinefield from '../utils/generateMinefield'
+import updateSquareBox from '../utils/updateSquareBox'
+
+export type MarkType = 'reveal' | 'flag'
 
 export function useMinefield() {
 	const { minefield, updateBoard, updateMinesLeft, updateGameState } = useContext(MinefieldContext)
@@ -12,5 +15,11 @@ export function useMinefield() {
 		updateGameState(newMinefield.gameState)
 	}
 
-	return { minefield, updateBoard, updateMinesLeft, updateGameState, generate }
+	const markSquareBox = (row: number, col: number, isFlag: boolean) => {
+		const newMinefield = { ...minefield }
+		updateSquareBox(newMinefield.board, row, col, isFlag)
+		updateBoard(newMinefield.board)
+	}
+
+	return { minefield, updateBoard, updateMinesLeft, updateGameState, generate, markSquareBox }
 }
