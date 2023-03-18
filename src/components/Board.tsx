@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import getAdjacentBombCount from "../utils/getAdjacentBombCount";
+import handleBoxReveal from "../utils/handleBoxReveal";
 import SquareBox from "./SquareBox";
 
 interface BoardProps {
@@ -28,49 +30,22 @@ const Board = ({ bombPercentage, isGameOver, onGameOver }: BoardProps) => {
 
     setBoard(newBoard);
   }, [bombPercentage]);
-
-  const handleBoxReveal = (rowIndex: number, colIndex: number) => {
-    if (board[rowIndex][colIndex] === 1) {
-      onGameOver();
-    }
-  };
-  const getAdjacentBombCount = (board: number[][], rowIndex: number, colIndex: number) => {
-    const offsets = [-1, 0, 1];
-    let count = 0;
-  
-    for (let i = 0; i < offsets.length; i++) {
-      const row = rowIndex + offsets[i];
-      if (row < 0 || row >= board.length) continue;
-  
-      for (let j = 0; j < offsets.length; j++) {
-        const col = colIndex + offsets[j];
-        if (col < 0 || col >= board[0].length) continue;
-        if (row === rowIndex && col === colIndex) continue;
-  
-        if (board[row][col] === 1) {
-          count++;
-        }
-      }
-    }
-  
-    return count;
-  };
   
   return (
     <div className="grid grid-cols-10 gap-0">
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => (
           <SquareBox
-            key={`${rowIndex}-${colIndex}`}
-            isBomb={cell === 1}
-            numberValue={
-              cell === 0
-                ? getAdjacentBombCount(board, rowIndex, colIndex)
-                : 0
-            }
-            onReveal={() => handleBoxReveal(rowIndex, colIndex)}
-            disabled={isGameOver}
-            isGameOver={isGameOver}
+              key={`${rowIndex}-${colIndex}`}
+              isBomb={cell === 1}
+              numberValue={
+                  cell === 0
+                      ? getAdjacentBombCount(board, rowIndex, colIndex)
+                      : 0
+              }
+              onReveal={() => handleBoxReveal(rowIndex, colIndex, board, onGameOver)}
+              disabled={isGameOver}
+              isGameOver={isGameOver}
           />
         ))
       )}
