@@ -7,7 +7,7 @@ const GameBoard: React.FC = () => {
 	const { minefield, handleBoxClick } = useMinefield()
 
 	return (
-		<div className="grid grid-cols-10 grid-rows-10 gap-1">
+		<div className="grid grid-cols-10 grid-rows-10 gap-0">
 			{minefield.board.boxes.map((row, rowIndex) => (
 				row.map((box, colIndex) => (
 					<Square

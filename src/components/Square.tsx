@@ -14,7 +14,7 @@ const Square: React.FC<SquareProps> = ({ square, onClick }) => {
 
 	return (
 		<button
-			className={`relative flex justify-center items-center bg-gray-300 w-8 h-8 rounded-sm border border-gray-400 ${square.isRevealed && !square.isMine ? 'bg-black text-white' : ''} ${square.isRevealed && square.isMine ? 'bg-gray-100' : ''} ${square.isMine ? 'text-red-500' : ''} ${square.isFlagged ? 'bg-yellow-300' : ''}`}
+			className={`relative flex justify-center items-center w-8 h-8 border border-black ${square.isRevealed && !square.isMine ? 'bg-black text-white' : 'bg-gray-400'} ${square.isRevealed && square.isMine ? 'bg-gray-100' : ''} ${square.isMine ? 'text-red-500' : ''} ${square.isFlagged ? 'bg-yellow-300' : ''}`}
 			onClick={onClick}
 			onContextMenu={handleRightClick}
 		>
@@ -28,6 +28,7 @@ const Square: React.FC<SquareProps> = ({ square, onClick }) => {
 				<i className="absolute text-yellow-800 text-xl material-icons">flag</i>
 			)}
 		</button>
+
 	)
 }
 
