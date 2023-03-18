@@ -44,14 +44,34 @@ export function useMinefield() {
 	
 			// Atualiza o game state para LOST
 			newMinefield.gameState = GameState.LOST
+	
+			// Atualiza o estado do tabuleiro com as mudanças
+			updateBoard(newMinefield.board)
+			updateGameState(newMinefield.gameState)
+	
+			return
 		}
 	
 		// Atualiza o estado do box clicado (revealed ou flagged)
 		updateSquareBox(newMinefield.board, row, col, isFlag)
 	
+		// Verifica se o box clicado tem minesAround igual a 0 e revela os boxes vizinhos
+		if (box.minesAround === 0) {
+			const rows = newMinefield.board.rows
+			const cols = newMinefield.board.cols
+	
+			for (let i = row - 1; i <= row + 1; i++) {
+				for (let j = col - 1; j <= col + 1; j++) {
+					if (i >= 0 && i < rows && j >= 0 && j < cols && !(i === row && j === col)) {
+						handleBoxClick(i, j, false)
+					}
+				}
+			}
+		}
+	
 		// Atualiza a contagem de boxes revelados e marcados com bandeira
-		const revealedCount = newMinefield.board.boxes.flat().filter(box => box.isRevealed).length
-		const flaggedCount = newMinefield.board.boxes.flat().filter(box => box.isFlagged).length
+		const revealedCount = newMinefield.board.boxes.flat().filter((box) => box.isRevealed).length
+		const flaggedCount = newMinefield.board.boxes.flat().filter((box) => box.isFlagged).length
 	
 		// Verifica se o jogo deve ser reiniciado
 		if (revealedCount + flaggedCount === 0) {
@@ -59,9 +79,17 @@ export function useMinefield() {
 			return
 		}
 	
+		// Verifica se o jogo foi ganho
+		if (revealedCount + flaggedCount === newMinefield.board.rows * newMinefield.board.cols && flaggedCount === newMinefield.minesLeft) {
+			newMinefield.gameState = GameState.WON
+			updateGameState(newMinefield.gameState)
+		}
+	
 		// Atualiza o estado do tabuleiro com as mudanças
 		updateBoard(newMinefield.board)
 	}
+	
+
 
 	return { minefield, updateBoard, updateMinesLeft, updateGameState, generate,handleBoxClick }
 }
