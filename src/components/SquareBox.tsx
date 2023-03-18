@@ -42,7 +42,7 @@ const SquareBox = ({
     >
       {isRevealed && (
         <div className="w-full h-full flex items-center justify-center">
-          <span className={textClasses}>{isBomb ? "B" : numberValue}</span>
+          <span className={textClasses}>{isBomb ? "💣" : numberValue}</span>
         </div>
       )}
     </div>

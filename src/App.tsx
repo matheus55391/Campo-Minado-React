@@ -19,17 +19,12 @@ function App() {
       <div className="flex items-center justify-between bg-gray-200 py-2 px-4">
         <h1 className="text-2xl font-bold">Campo Minado</h1>
         <button
-          className="p-2 bg-blue-500 text-white rounded-md"
+          className={`p-2 rounded-md ${gameOver ? "bg-red-500 text-white cursor-default" : "bg-blue-500 text-white"}`}
           onClick={handleReset}
         >
-          Reset
+          {gameOver ? "GAMEOVER" : "Reset"}
         </button>
       </div>
-      {gameOver && (
-        <div className="flex justify-center items-center text-red-500 font-bold">
-          GAMEOVER
-        </div>
-      )}
       <div className="flex-1 flex justify-center items-center">
         <Board bombPercentage={10} key={key} isGameOver={gameOver} onGameOver={handleGameOver} />
       </div>
