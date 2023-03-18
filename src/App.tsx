@@ -1,11 +1,19 @@
-import React from 'react'
+import SquareBox from "./components/SquareBox";
 
-const App: React.FC = () => {
+function App() {
   return (
-    <div>
-      Oi
+    <div className="flex flex-wrap">
+      <SquareBox isBomb={true} />
+      <SquareBox isBomb={false} />
+      <SquareBox isBomb={false} />
+      <SquareBox isBomb={true} />
+      <SquareBox isBomb={false} />
+      <SquareBox isBomb={false} />
+      <SquareBox isBomb={false} />
+      <SquareBox isBomb={false} />
+      <SquareBox isBomb={true} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
