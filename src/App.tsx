@@ -17,7 +17,7 @@ function App() {
 				<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleReset}>NOVO JOGO</button>
 			</nav>
 			<div className="flex justify-center items-center flex-grow">
-				<div className="bg-gray-500 rounded-md p-4">
+				<div className="bg-gray-300 rounded-md p-2">
 					<GameBoard />
 				</div>
 			</div>
