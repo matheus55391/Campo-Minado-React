@@ -7,27 +7,28 @@ interface SquareProps {
 }
 
 const Square: React.FC<SquareProps> = ({ square, onClick }) => {
-	const handleRightClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+	const handleRightClick = (event:  React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		event.preventDefault()
 		onClick()
 	}
 
+	const defaultBoxClasses =
+    'w-8 h-8 border border-black bg-white cursor-pointer'
+	const revealedBoxClasses = square.isMine ? 'bg-red-600' : 'bg-gray-200'
+	const textClasses = 'text-base font-bold'
+	
 	return (
-		<button
-			className={`relative flex justify-center items-center w-8 h-8 border border-black ${square.isRevealed && !square.isMine ? 'bg-black text-white' : 'bg-gray-400'} ${square.isRevealed && square.isMine ? 'bg-gray-100' : ''} ${square.isMine ? 'text-red-500' : ''} ${square.isFlagged ? 'bg-yellow-300' : ''}`}
-			onClick={onClick}
-			onContextMenu={handleRightClick}
+		<div
+			className={`${defaultBoxClasses} ${square.isRevealed ? revealedBoxClasses : ''}`}
+			onClick={handleRightClick}
+			
 		>
-			{square.isRevealed && !square.isMine && square.minesAround !== 0 && (
-				<span className={`absolute text-${square.minesAround}-500 text-xs`}>{square.minesAround}</span>
+			{square.isRevealed && (
+				<div className="w-full h-full flex items-center justify-center">
+					<span className={textClasses}>{square.isMine ? '💣' : square.minesAround}</span>
+				</div>
 			)}
-			{square.isRevealed && square.isMine && (
-				<i className="absolute text-red-500 text-xl material-icons">💣</i>
-			)}
-			{!square.isRevealed && square.isFlagged && (
-				<i className="absolute text-yellow-800 text-xl material-icons">flag</i>
-			)}
-		</button>
+		</div>
 
 	)
 }
