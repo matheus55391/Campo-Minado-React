@@ -5,13 +5,12 @@ import generateMinefield from '../utils/generateMinefield'
 import updateSquareBox from '../utils/updateSquareBox'
 
 export function useMinefield() {
-	const { minefield, updateBoard, updateMinesLeft, updateGameState } = useContext(MinefieldContext)
+	const { minefield, setMinefield, updateBoard, updateMinesLeft, updateGameState } = useContext(MinefieldContext)
 
 	const generate = (rows: number, cols: number, minePercent: number) => {
 		const newMinefield = generateMinefield(rows, cols, minePercent)
-		updateBoard(newMinefield.board)
-		updateMinesLeft(newMinefield.minesLeft)
-		updateGameState(newMinefield.gameState)
+		console.log('🚀 ~ file: useMineField.tsx:12 ~ generate ~ newMinefield:', newMinefield)
+		setMinefield(newMinefield)
 	}
 
 	const handleBoxClick = (row: number, col: number, isFlag: boolean) => {
@@ -91,5 +90,5 @@ export function useMinefield() {
 	
 
 
-	return { minefield, updateBoard, updateMinesLeft, updateGameState, generate,handleBoxClick }
+	return { minefield, updateBoard, updateMinesLeft, updateGameState, generate, handleBoxClick }
 }
