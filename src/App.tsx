@@ -16,8 +16,6 @@ function App() {
 				<h1 className="font-bold text-xl">Campo Minado</h1>
 				<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleReset}>NOVO JOGO</button>
 			</nav>
-			<a href="exp+eucard-app://Login/12345678900/senha123">Clique aqui para abrir o aplicativo EU Card</a>
-
 			<div className="flex justify-center items-center flex-grow">
 				<div className="bg-gray-300 rounded-md p-2">
 					<GameBoard />
