@@ -2,4 +2,5 @@
 
 ![Campo Minado](./public/game_image.png)
 
-Este é um projeto de Campo Minado desenvolvido em [linguagem de programação]. Ele é uma versão digital do clássico jogo Campo Minado, onde o objetivo é desvendar o campo evitando as minas.
+Este é um projeto de Campo Minado desenvolvido com react. 
+Fiz ele em uma madrugada virada de brincadeira com alguns membros do discord da rocket.
